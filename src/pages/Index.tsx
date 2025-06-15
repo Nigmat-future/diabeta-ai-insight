@@ -3,6 +3,7 @@ import PatientForm from "@/components/PatientForm";
 import DiagnosisResult from "@/components/DiagnosisResult";
 import DiagnosisReason from "@/components/DiagnosisReason";
 import AiProviderSelector from "@/components/AiProviderSelector";
+import PatientAdvice from "@/components/PatientAdvice";
 import { aiDiagnosePatient, PatientData, AiDiagnosisResult } from "@/lib/diabetesAi";
 import { toast } from "@/hooks/use-toast";
 import { Brain, Database, Stethoscope, Zap } from "lucide-react";
@@ -129,6 +130,7 @@ const Index = () => {
             <div className="space-y-6 animate-fade-in">
               <DiagnosisResult possibility={aiRes.possibility} suggestion={aiRes.suggestion} />
               <DiagnosisReason reason={aiRes.reason} />
+              <PatientAdvice advice={aiRes.patientAdvice} />
             </div>
           ) : (
             <div className="flex flex-col items-center justify-center min-h-[500px] text-center">
