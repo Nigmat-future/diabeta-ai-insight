@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import PatientForm from "@/components/PatientForm";
 import DiagnosisResult from "@/components/DiagnosisResult";
@@ -72,40 +71,41 @@ const Index = () => {
     }
   }
 
+  // Adjusted English titles, text, and color classes!
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-purple-900">
-      {/* 科技感背景效果 */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(120,119,198,0.1),transparent)] pointer-events-none"></div>
-      <div className="absolute inset-0 bg-grid-pattern opacity-5 pointer-events-none"></div>
-      
-      {/* 顶部导航栏 */}
-      <header className="relative backdrop-blur-md bg-slate-900/80 border-b border-slate-700 shadow-2xl">
+    <div className="min-h-screen bg-gradient-to-br from-[#16182a] via-[#232452] to-[#251640]">
+      {/* Futuristic effect overlays */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(80,150,255,0.10),transparent)] pointer-events-none" />
+      <div className="absolute inset-0 bg-grid-pattern opacity-5 pointer-events-none" />
+
+      {/* Top Nav */}
+      <header className="relative backdrop-blur-md bg-[#1b1f37]/90 border-b border-[#343677] shadow-2xl">
         <div className="px-8 py-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <div className="p-3 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500">
+              <div className="p-3 rounded-2xl bg-gradient-to-br from-[#4e75e6] to-[#59eaff] shadow-lg">
                 <Brain className="text-white" size={32} />
               </div>
               <div>
-                <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                  AI 智能糖尿病诊断系统
+                <h1 className="text-3xl font-bold bg-gradient-to-r from-[#82afff] to-[#33ffe6] bg-clip-text text-transparent">
+                  AI Diabetes Diagnosis System
                 </h1>
-                <p className="text-slate-400 text-sm mt-1">基于深度学习的医学诊断辅助平台</p>
+                <p className="text-[#8fa8d4] text-sm mt-1">A deep learning powered medical diagnosis assistant</p>
               </div>
             </div>
-            <div className="flex items-center gap-4 text-slate-400">
+            <div className="flex items-center gap-4 text-[#97b9f8]">
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                <span className="text-sm">系统在线</span>
+                <span className="text-sm">System Online</span>
               </div>
             </div>
           </div>
         </div>
       </header>
 
-      {/* 主内容区域 */}
+      {/* Main Content */}
       <main className="relative flex flex-col xl:flex-row gap-8 px-8 py-8 max-w-7xl mx-auto">
-        {/* 左侧面板 */}
+        {/* Left Panel */}
         <aside className="xl:w-96 space-y-6">
           <AiProviderSelector
             selectedProvider={selectedProvider}
@@ -113,9 +113,9 @@ const Index = () => {
             onProviderChange={setSelectedProvider}
             onApiKeyChange={setApiKey}
           />
-          
+
           <PatientForm onSubmit={handleFormSubmit} loading={loading} />
-          
+
           {inputData && (
             <div className="animate-fade-in">
               {renderDataTable()}
@@ -123,7 +123,7 @@ const Index = () => {
           )}
         </aside>
 
-        {/* 右侧诊断结果区域 */}
+        {/* Right Diagnosis Area */}
         <section className="flex-1 space-y-6">
           {aiRes ? (
             <div className="space-y-6 animate-fade-in">
@@ -132,25 +132,25 @@ const Index = () => {
             </div>
           ) : (
             <div className="flex flex-col items-center justify-center min-h-[500px] text-center">
-              <div className="p-8 rounded-full bg-gradient-to-br from-blue-500/20 to-purple-500/20 backdrop-blur-sm border border-blue-500/30 mb-6">
+              <div className="p-8 rounded-full bg-gradient-to-br from-[#486fff]/10 to-[#c174ff]/10 backdrop-blur-sm border border-blue-500/30 mb-6">
                 <Brain className="text-blue-400" size={64} />
               </div>
-              <h3 className="text-2xl font-bold text-white mb-3">AI诊断引擎待命中</h3>
-              <p className="text-slate-400 max-w-md">
-                请在左侧完成患者检验数据录入和AI配置，然后启动智能诊断分析
+              <h3 className="text-2xl font-bold text-white mb-3">AI Diagnosis Engine Standing By</h3>
+              <p className="text-[#89b0c2] max-w-md">
+                Please enter medical test data and AI config on the left, then start the smart diagnosis analysis.
               </p>
-              <div className="mt-6 flex items-center gap-4 text-sm text-slate-500">
+              <div className="mt-6 flex items-center gap-4 text-sm text-[#667aad]">
                 <div className="flex items-center gap-2">
-                  <div className="w-1 h-1 bg-blue-400 rounded-full"></div>
-                  <span>支持多种AI模型</span>
+                  <div className="w-1 h-1 bg-accent rounded-full"></div>
+                  <span>Multi-AI provider support</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-1 h-1 bg-blue-400 rounded-full"></div>
-                  <span>医学级精准分析</span>
+                  <div className="w-1 h-1 bg-accent rounded-full"></div>
+                  <span>Medical-grade accurate analysis</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-1 h-1 bg-blue-400 rounded-full"></div>
-                  <span>实时诊断建议</span>
+                  <div className="w-1 h-1 bg-accent rounded-full"></div>
+                  <span>Real-time suggestion</span>
                 </div>
               </div>
             </div>
@@ -158,10 +158,10 @@ const Index = () => {
         </section>
       </main>
 
-      {/* 页脚 */}
-      <footer className="relative backdrop-blur-md bg-slate-900/50 border-t border-slate-700 py-4 mt-auto">
-        <div className="text-center text-xs text-slate-500">
-          基于 AI 深度学习技术 · 医学研究与教学用途 · 请勿用于实际临床诊断
+      {/* Footer */}
+      <footer className="relative backdrop-blur-md bg-[#1b1f37]/80 border-t border-[#343677] py-4 mt-auto">
+        <div className="text-center text-xs text-[#7c92b3]">
+          Powered by AI and deep learning &middot; For research and educational purposes &middot; Not for clinical use
         </div>
       </footer>
     </div>
