@@ -1,4 +1,3 @@
-
 /**
  * diabetesAi.ts
  * AI糖尿病分析通信，支持多个AI提供商
@@ -47,7 +46,11 @@ export async function aiDiagnosePatient(
     try {
       const parsedResult = JSON.parse(aiResponse);
       if (parsedResult.possibility && parsedResult.suggestion && parsedResult.reason) {
-        return parsedResult;
+        return {
+          possibility: String(parsedResult.possibility).replace(/^`+json\s*/i, '').replace(/`+$/g, '').trim(),
+          suggestion: String(parsedResult.suggestion).replace(/^`+json\s*/i, '').replace(/`+$/g, '').trim(),
+          reason: String(parsedResult.reason).replace(/^`+json\s*/i, '').replace(/`+$/g, '').trim(),
+        };
       }
     } catch (parseError) {
       console.warn('AI返回结果解析失败，使用文本解析:', parseError);
@@ -63,10 +66,13 @@ export async function aiDiagnosePatient(
 }
 
 function parseAiTextResponse(aiResponse: string, input: PatientData): AiDiagnosisResult {
+  // 去除可能的 ```json、``` 等包裹
+  let response = aiResponse.replace(/^[`]*json[\s\n]*/i, "").replace(/[`]*$/g, "").trim();
+
   // 简单的文本解析逻辑
   const hba1c = parseFloat(input.hba1c);
   const fbg = parseFloat(input.fbg);
-  
+
   let possibility = "无法确定";
   if (hba1c >= 6.5 || fbg >= 7) {
     possibility = "糖尿病高风险";
@@ -76,10 +82,11 @@ function parseAiTextResponse(aiResponse: string, input: PatientData): AiDiagnosi
     possibility = "风险较低";
   }
 
+  // **完整保留全部 reason/suggestion 内容**
   return {
     possibility,
-    suggestion: aiResponse.length > 50 ? aiResponse.substring(0, 200) + "..." : "AI建议：请结合临床进一步确诊",
-    reason: `基于AI分析：${aiResponse.length > 100 ? aiResponse.substring(0, 150) + "..." : aiResponse}`
+    suggestion: response || "AI建议：请结合临床进一步确诊",
+    reason: response || "基于AI分析，详见建议内容",  // 若无法区分就同样返回
   };
 }
 

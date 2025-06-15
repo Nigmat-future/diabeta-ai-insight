@@ -18,11 +18,10 @@ const DiagnosisReason: React.FC<DiagnosisReasonProps> = ({ reason }) => (
         <div className="text-sm text-indigo-300">基于医学知识库的深度分析</div>
       </div>
     </div>
-    
     <div className="bg-black/20 backdrop-blur-sm rounded-lg p-4 border border-white/10">
       <div className="flex items-start gap-3">
         <Info className="text-indigo-400 mt-1 flex-shrink-0" size={20} />
-        <div className="text-sm text-gray-200 leading-relaxed">
+        <div className="text-sm text-gray-200 leading-relaxed break-all whitespace-pre-line">
           {reason}
         </div>
       </div>
