@@ -1,3 +1,4 @@
+
 /**
  * diabetesAi.ts
  * AI糖尿病分析通信，支持多个AI提供商
@@ -108,20 +109,20 @@ async function simulatedDiagnosis(input: PatientData): Promise<AiDiagnosisResult
   } else if (hba1c >= 6.5 || fbg >= 7) {
     possibility = "糖尿病高风险";
     suggestion = input.biochem === "" ? "建议补充生化全套检查" : "建议结合临床进一步确诊";
-    reason = `患者糖化血红蛋白 ${input.hba1c}%，血糖 ${input.fbg} mmol/L，均已超过糖尿病诊断阈值。`;
+    reason = `患者糖化血红蛋白 ${input.hba1c}%，血糖 ${input.fbg} mmol/L，均已超过糖尿病诊断阈值。根据WHO诊断标准，糖化血红蛋白≥6.5%或空腹血糖≥7.0mmol/L可诊断为糖尿病。该患者的检验结果显示存在明显的血糖代谢异常，提示胰岛β细胞功能受损，胰岛素分泌不足或胰岛素抵抗。`;
   } else if (hba1c >= 6.0 || fbg >= 6.1) {
     possibility = "糖尿病风险中等";
-    suggestion = "建议定期复查，注意生活干预";
-    reason = `患者指标接近糖尿病临界值（HbA1c: 6.0~6.5%，血糖: 6.1~7.0mmol/L）。`;
+    suggestion = "建议定期复查，注意生活干预，控制饮食和加强运动";
+    reason = `患者指标接近糖尿病临界值（HbA1c: 6.0~6.5%，血糖: 6.1~7.0mmol/L）。该范围通常被称为糖尿病前期或糖调节受损状态，表明患者存在一定程度的胰岛素抵抗或胰岛功能下降，但尚未达到糖尿病诊断标准。此阶段通过积极的生活方式干预仍有可能逆转或延缓糖尿病的发生。`;
   } else {
     possibility = "风险较低";
-    suggestion = "建议日常健康管理";
-    reason = `各项检测均未超过糖尿病判定标准。`;
+    suggestion = "建议日常健康管理，保持均衡饮食和适量运动";
+    reason = `各项检测均未超过糖尿病判定标准。患者糖化血红蛋白${input.hba1c}%和血糖${input.fbg}mmol/L均在正常范围内，表明当前血糖代谢功能良好，胰岛功能正常。建议继续保持健康的生活方式，定期体检监测。`;
   }
   
   // 针对复杂情况的补检建议
   if ((input.biochem.includes("ALT") || input.biochem.includes("AST")) && !input.hormones) {
-    suggestion += " - 建议补充激素项目以排查其他代谢异常。";
+    suggestion += " 考虑到肝功能指标异常，建议补充胰岛素、C肽等激素项目检查，以全面评估胰岛功能状态。";
   }
   
   return { possibility, suggestion, reason };
